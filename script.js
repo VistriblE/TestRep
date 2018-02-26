@@ -21,10 +21,10 @@
 // alert('Вам ' + years + ' лет!');
 // console.log(years);
 
-var operators = [
+const operators = [
     {
         sign: "-", 
-        method: function(a,b){
+        method: function(a, b){
         console.log( 'a = ', a);
         console.log('b = ', b);
         return a-b;
@@ -32,7 +32,7 @@ var operators = [
     },
     {
         sign: "+", 
-        method: function(a,b){
+        method: function(a, b) {
         console.log( 'a = ', a);
         console.log('b = ', b);
         return a+b;
@@ -40,7 +40,7 @@ var operators = [
     },
     { 
         sign: "*", 
-        method: function(a,b){
+        method: function(a, b){
         console.log( 'a = ', a);
         console.log('b = ', b);
         return a*b;
@@ -48,11 +48,11 @@ var operators = [
     },
     {
         sign: "/", 
-        method: function(a,b){
-        while(b==0){
+        method: function(a, b){
+        while (b == 0) {
             b = Math.round(Math.random() * 10);
         }    
-        console.log( 'a = ', a);
+        console.log('a = ', a);
         console.log('b = ', b);
         return a/b;
         }
@@ -61,47 +61,59 @@ var operators = [
 
 
 // 5!!!
+function GetDotCount(str) {
+    let dotCounter = 0;
+    for( i = 0; i < str.length; i++) {
+        if ( str[i] == ".") {
+            dotCounter++;
+        }
+    }
+    return dotCounter;
+}
 
-var t;
-var b;
-var strB;
-flag = true;
-var neededStr;
-var userStr;
-var operator;
+function GetRandomNumber(min, max) {
+    let rand = 0;
+    while (rand == 0) {
+        rand = Math.round(Math.random()*(max - min) + min);
+    }
+    return rand;
+}
+
+let flag = true;
 
 while (flag) {
-    // t = Math.round(Math.random() * 10);
-    // b = Math.round(Math.random() * 10);
-    operator = Math.round(Math.random()*3);  
-    t = Math.round(Math.random()*20 - 10);
-    b = Math.round(Math.random()*20 - 10);
-    
-    if(b < 0) {
-        strB = `(${b})`;
+    // const operator = Math.round(Math.random()*3);  
+    // const TopValue = Math.round(Math.random()*20 - 10);
+    // const BottomValue = Math.round(Math.random()*20 - 10);
+    const operator = +GetRandomNumber(1, 4) - 1;
+    const TopValue = GetRandomNumber(-10, 10);
+    const BottomValue = GetRandomNumber(-10, 10);
+
+    console.log('top = ', TopValue);
+    console.log('bot = ', BottomValue);
+    console.log('sign = ', operator);
+    let strB;
+
+    if (BottomValue < 0) {
+        strB = `(${BottomValue})`;
     } else {
-        strB = `${b}`;
+        strB = `${BottomValue}`;
     }
 
-    neededStr = (operators[operator].method(t,b)).toFixed(1);
+    const neededStr = (operators[operator].method(TopValue,BottomValue)).toFixed(1);
     console.log('neededStr: ', neededStr);
-    console.log(t);
-    console.log(b);
-    userStr = prompt(`Введи число ${t}${operators[operator].sign}${strB}: `,);
+    console.log(TopValue);
+    console.log(BottomValue);
+    const userStr = prompt(`Введи число ${TopValue}${operators[operator].sign}${strB}: `,).replace(",",".");
     console.log(userStr);
-    userStr = userStr.replace(",",".");
 
     console.log('userStr: ', userStr);
-    if( +userStr == +neededStr) {
+    if (+userStr == +neededStr) {
         alert('Давай ещё по одной!!!');
     } else {
-        var dotCounter = 0;
-        for( i = 0; i < userStr.length; i++) {
-            if( userStr[i] == ".") {
-                dotCounter++;
-            }
-        }
-        if (dotCounter>1){
+//        var dotCounter = 0;
+        const dot = GetDotCount(userStr);
+        if (dot>1){
             alert('Воу Воу, поменьше точек, алкоголик!');
             flag = false;
             break;
