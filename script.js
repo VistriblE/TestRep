@@ -2,53 +2,42 @@ const operators = [
     {
         sign: '-', 
         method: function(a, b){
-            return a-b;
+            return a - b;
         }
     },
     {
         sign: '+', 
         method: function(a, b) {
-            return a+b;
+            return a + b;
         }
     },
     { 
         sign: '*', 
         method: function(a, b) {
-            return a*b;
+            return a * b;
         }
     },
     {
         sign: '/', 
         method: function(a, b) {
-            return a/b;
+            return a / b;
         }
     }
 ];
 
-function GetDotCount(str) {
-    let dotCounter = 0;
-    for( i = 0; i < str.length; i++) {
-        if ( str[i] == ".") {
-            dotCounter++;
-        }
-    }
-    return dotCounter;
-}
-
-function GetRandomNumber(min, max) {
-    while (rand == 0) {
-        const rand = Math.round(Math.random()*(max - min) + min);
+function getRandomNumber(min, max) {
+    while (true) {
+        const rand = Math.round(Math.random() * (max - min) + min);
         if (rand != 0) {
-            break;
+            return rand;
         }
     }
-    return rand;
 }
 
 while (true) {
-    const operator = GetRandomNumber(1, 4) - 1;
-    const TopValue = GetRandomNumber(-10, 10);
-    const BottomValue = GetRandomNumber(-10, 10);
+    const operator = getRandomNumber(1, 4) - 1;
+    const TopValue = getRandomNumber(-10, 10);
+    const BottomValue = getRandomNumber(-10, 10);
 
     console.log('top = ', TopValue);
     console.log('bot = ', BottomValue);
