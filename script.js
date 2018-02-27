@@ -1,53 +1,54 @@
 const operators = [
     {
         sign: '-', 
-        method: function(a, b){
+        method(a, b){
             return a - b;
         }
     },
     {
         sign: '+', 
-        method: function(a, b) {
+        method(a, b) {
             return a + b;
         }
     },
     { 
         sign: '*', 
-        method: function(a, b) {
+        method(a, b) {
             return a * b;
         }
     },
     {
         sign: '/', 
-        method: function(a, b) {
+        method(a, b) {
             return a / b;
         }
     }
 ];
 
 function getRandomNumber(min, max) {
-    while (true) {
-        const rand = Math.floor(Math.random() * (max + 1 - min) + min);
-        if (rand != 0) {
-            return rand;
-        }
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+function getStrictRandom(min, max) {
+    const num = getRandomNumber(min, max);
+
+    if (num == 0) {
+        return max;
+    } else {
+        return num;
     }
 }
 
 while (true) {
-    const operator = getRandomNumber(1, 4) - 1;
-    const TopValue = getRandomNumber(-10, 10);
-    const BottomValue = getRandomNumber(-10, 10);
+    const min = -10;
+    const max = 10;
+    const operator = getRandomNumber(0, 3);
+    const topValue = getStrictRandom(min, max);
+    const bottomValue = getStrictRandom(min, max);
+    const strBottom = bottomValue < 0 ? `(${bottomValue})` : `${bottomValue}`; 
+    const neededStr = (operators[operator].method(topValue,bottomValue)).toFixed(1);
+    const userStr = prompt(`Введи число ${topValue}${operators[operator].sign}${strBottom}: `,).replace(',', '.');
 
-    console.log('top = ', TopValue);
-    console.log('bot = ', BottomValue);
-    const strB = BottomValue < 0 ? `(${BottomValue})` : `${BottomValue}`; 
-
-
-    const neededStr = (operators[operator].method(TopValue,BottomValue)).toFixed(1);
-    console.log('neededStr: ', neededStr);
-    const userStr = prompt(`Введи число ${TopValue}${operators[operator].sign}${strB}: `,).replace(',','.');
-    console.log('userStr: ', userStr);
     if (+userStr == +neededStr) {
         alert('Давай ещё по одной!!!');
     } else {
