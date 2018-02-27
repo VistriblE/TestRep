@@ -27,7 +27,7 @@ const operators = [
 
 function getRandomNumber(min, max) {
     while (true) {
-        const rand = Math.round(Math.random() * (max - min) + min);
+        const rand = Math.floor(Math.random() * (max + 1 - min) + min);
         if (rand != 0) {
             return rand;
         }
@@ -41,17 +41,12 @@ while (true) {
 
     console.log('top = ', TopValue);
     console.log('bot = ', BottomValue);
-    let strB;
+    const strB = BottomValue < 0 ? `(${BottomValue})` : `${BottomValue}`; 
 
-    if (BottomValue < 0) {
-        strB = `(${BottomValue})`;
-    } else {
-        strB = `${BottomValue}`;
-    }
 
     const neededStr = (operators[operator].method(TopValue,BottomValue)).toFixed(1);
     console.log('neededStr: ', neededStr);
-    const userStr = prompt(`Введи число ${TopValue}${operators[operator].sign}${strB}: `,).replace(",",".");
+    const userStr = prompt(`Введи число ${TopValue}${operators[operator].sign}${strB}: `,).replace(',','.');
     console.log('userStr: ', userStr);
     if (+userStr == +neededStr) {
         alert('Давай ещё по одной!!!');
