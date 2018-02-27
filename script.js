@@ -25,26 +25,23 @@ const operators = [
     }
 ];
 
+const min = -10;    
+const max = 10;
+
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-function getStrictRandom(min, max) {
+function getStrictRandom() {
     const num = getRandomNumber(min, max);
 
-    if (num == 0) {
-        return max;
-    } else {
-        return num;
-    }
+    return num == 0 ? max : num;
 }
 
 while (true) {
-    const min = -10;
-    const max = 10;
-    const operator = getRandomNumber(0, 3);
-    const topValue = getStrictRandom(min, max);
-    const bottomValue = getStrictRandom(min, max);
+    const operator = getRandomNumber(0, 4);
+    const topValue = getStrictRandom();
+    const bottomValue = getStrictRandom();
     const strBottom = bottomValue < 0 ? `(${bottomValue})` : `${bottomValue}`; 
     const neededStr = (operators[operator].method(topValue,bottomValue)).toFixed(1);
     const userStr = prompt(`Введи число ${topValue}${operators[operator].sign}${strBottom}: `,).replace(',', '.');
