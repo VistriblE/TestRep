@@ -45,7 +45,7 @@ while (true) {
     const bottomValue = getStrictRandom();
     const strBottom = bottomValue < 0 ? `(${bottomValue})` : `${bottomValue}`; 
     const neededStr = (operators[operator].method(topValue,bottomValue)).toFixed(1);
-    const userStr = prompt(`Введи число ${topValue}${operators[operator].sign}${strBottom}: `,).replace(',', '.');
+    const userStr = prompt(`Введи число ${topValue}${operators[operator].sign}${strBottom}: `).replace(',', '.');
 
     if (+userStr == +neededStr) {
         alert('Давай ещё по одной!!!');
