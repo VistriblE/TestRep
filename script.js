@@ -25,14 +25,15 @@ const operators = [
     }
 ];
 
-const min = -10;    
-const max = 10;
+
 
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
 function getStrictRandom() {
+    const min = -10;    
+    const max = 10;
     const num = getRandomNumber(min, max);
 
     return num == 0 ? max : num;
