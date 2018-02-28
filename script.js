@@ -2,6 +2,7 @@ const operators = [
     {
         sign: '-', 
         method(a, b){
+         
             return a - b;
         }
     },
